@@ -1,0 +1,131 @@
+
+Lay nhung diem doc lap 
+
+
+function getCriticalPaths (paths) {
+  const n  = paths.length
+  if(n <= 0 ){
+    return []
+  }
+  // save all points
+  let hashmap = {};
+  for(let i = 0; i < n ; i++){
+    // point must to two points
+    if(paths[i].length < 2){
+        continue
+    }
+    // add point to hashmap
+    addData(hashmap, paths[i])
+  }
+  // get result from all points saved
+  const result = getPaths(hashmap)
+  return result
+}
+
+function getPaths(hashmap)
+{
+  let result = []
+  for(let i in hashmap){
+    // If point is -1. We will continue
+      if(hashmap[i] === -1){
+        continue
+      }
+      result.push(hashmap[i])
+  }
+  return result
+}
+
+function addData(hashmap , arrI )
+{
+  const key = arrI[0]
+  const key1 = arrI[1]
+  // add first point
+  add(hashmap, key , arrI)
+  // add second point
+  add(hashmap, key1 , arrI)
+}
+
+function add (hashmap, key, value){
+  // If point have already
+  if(typeof hashmap[key] !== "undefined") {
+    // if point is -1. We will nothing
+    hashmap[key] = -1
+    return
+  }
+  hashmap[key] = value
+}
+
+// const paths = [[1, 3],[0,1], [1, 2],  [0, 2], [2,4]] 
+const paths = [['a', 'b'], ['b', 'c'] , ['c', 'a'],['c', 'd']]
+const result = getCriticalPaths(paths)
+console.log(result)
+// Complexity time  0(n)
+
+==============================================================================================================================================
+==============================================================================================================================================
+==============================================================================================================================================
+Cho 1 string: inputString Tra ye so luong chuoi con khac nhau
+VI du: inputString = "abc" => Output = 7 Danh sach chu6i con bao gem: (a, b, c, ab, bc, ac, abc) 
+VI du: inputString = "aaa" => Output = 3 Danh sach chu6i con bao gam: (a, aa, aaa) 
+VI du: inputString = "bcb" => Output = 6 Danh sach chu6i con bao gam (b, c, bc, cb, bb, bcb) 
+// Return total count
+function countTotal(str)
+{
+    // Hashmap store all character and position have already 
+    let hashMapCharacter = {}
+    // Length of input string
+    let n = str.length;
+ 
+    // countValues[i] is going to store count of character
+    let countValues = [];
+    // For multi equal not 0
+    countValues[0] = 1;
+ 
+    // Loop from 1 to n.
+    for(let i = 1; i <= n; i++)
+    {    
+        // Countitng all subsequences with substring
+        countValues[i] = 2 * countValues[i - 1];
+        
+        // If current character has appeared before
+        if (typeof hashMapCharacter[str[i - 1]] !== 'undefined'){
+         // total case at current position  -  total case at previous position
+          countValues[i] = countValues[i] - countValues[hashMapCharacter[str[i - 1]]];
+        }
+        // Marking current character
+        hashMapCharacter[str[i - 1]] = (i - 1);
+    }
+    return countValues[n];
+}
+// 2^n -1 with different character completely
+console.log(countTotal("abc") - 1 )
+// Complexity time  0(n)
+
+
+==============================================================================================================================================
+==============================================================================================================================================
+==============================================================================================================================================
+Gia su trong database có table Logs gam 2 column id & num 
+Logs id(int) I num(varchar) 
+Viet cau lenh SQL tre ye tat ca cac 56 a( column xuat hien It nhat 3 lan lien tuc 
+Vi du có table Logs nhu' sau: 
+Logs id num 11 21 31 41 52 62 71 82 93 103 114 124 134 
+Output: 
+Result 
+1 
+4
+
+SELECT custom_group, num
+FROM (
+    SELECT
+    num
+    , @groupNumber := IF(@prev_id != id and @prev_num != num, @groupNumber + 1, @groupNumber) AS custom_group
+    , @prev_num := num
+		, @prev_id := id
+    FROM logs l, (select (@groupNumber := 0)) init
+) l1
+GROUP BY custom_group, num
+HAVING count(*) >= 3
+
+
+
