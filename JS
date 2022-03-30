@@ -2,7 +2,6 @@
 Lay nhung diem doc lap 
 
 
-
 function getCriticalPaths (paths) {
   const n  = paths.length
   if(n <= 0 ){
