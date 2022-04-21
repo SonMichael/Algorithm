@@ -1,7 +1,3 @@
-from string import printable
-from unicodedata import numeric
-
-
 def binary_search(arr , number):
   length = len(arr)
   mid = length/2
