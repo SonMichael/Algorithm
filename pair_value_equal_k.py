@@ -87,3 +87,4 @@ try:
 except Exception as e:
   print("Lỗi thực thi: ", e)
 
+print("Lỗi thực thi: ", 2)
