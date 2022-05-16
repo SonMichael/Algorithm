@@ -29,7 +29,6 @@ def search(nums , value):
     return result1
 
 def binarySearch(nums, value, from_index , to_index):
-    # + ((from_index + to_index) % 2 > 0)
     pivot = ((from_index + to_index) / 2) 
     if nums[pivot] == value:
         return 1
