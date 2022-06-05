@@ -20,10 +20,8 @@ def findItinerary(tickets, keyDepart):
         return None
     hashMap = {src: [] for src, dst in tickets}
     tickets.sort(reverse=True)
-    print(tickets)
     for src, dst in tickets:
         hashMap[src].append(dst)
-    print(hashMap)
     memo = dict()
     dff(hashMap, keyDepart, [], memo)
     return memo
