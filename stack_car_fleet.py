@@ -17,8 +17,9 @@ def carFleet(target, position, speed):
     pairs = zip(position, speed)
     stack = []
     pairs_sorted = sorted(pairs)[::-1]
-    print(pairs_sorted)
     for pos, sped in pairs_sorted:
+        # Why minus:
+        # We only care before time targer, after target we don't care (It's mean time = 0)
         stack.append((target - pos) / sped)
         print(stack)
         if len(stack) >= 2 and stack[-1] <= stack[-2]:
@@ -31,7 +32,9 @@ def carFleet(target, position, speed):
 target = 10
 position = [3,5,7]
 speed = [3,2,1]
+# result = 1
 # target = 5
 # position = [1,2,3,5]
 # speed = [1,1,1,1]
+# result = 4
 print(carFleet(target, position, speed))
