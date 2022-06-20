@@ -6,14 +6,13 @@ class LinkedList:
 
     def reverse(self, root):
         prev = None
-        current = root
-        while (current is not None):
-            next = current.next
-            current.next = prev
-            prev = current
-            current = next
-            root = prev
-        return root
+        cur = root
+        while cur != None:
+            next = cur.next
+            cur.next = prev
+            prev = cur
+            cur = next
+        return prev
 
 
 
