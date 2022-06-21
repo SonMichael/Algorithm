@@ -40,6 +40,7 @@ def positions(matrix):
     return result
 
 def dff(matrix, row, col, prevValue, ocean):
+    # because 7 can flow to 6 so we must compare matrix[row][col] < prevValue
     if row < 0 or row > len(matrix) -1 or col < 0 or col > len(matrix[0]) - 1 or matrix[row][col] < prevValue or ocean[row][col] == 1:
         return
     ocean[row][col] = 1
