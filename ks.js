@@ -5,6 +5,8 @@ function ks(k, w, v, i, hashMemo) {
     return hashMemo[hashKey]
   }
   if(k < 0) {
+    // If we are return 0 we can't remove result. We must remove result because this is case wrong.
+    // we must return -inf because when the number plus with -inf = 0 (15 + -inf = 0, 100 + -inf = 0, ...)
     return Number.MIN_SAFE_INTEGER;
   }
   if(i < 0 || k === 0){
