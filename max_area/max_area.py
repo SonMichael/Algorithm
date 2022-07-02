@@ -6,6 +6,11 @@
 # Note: You may not slant the container and n is at least 2.
 # The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. 
 # In this case, the max area of water (blue section) the container can contain is 49
+# Input: height = [1,8,6,2,5,4,8,3,7]
+# Qutput: 49 = (8 - 1) * 7
+# Explanation: The above vertical lines ane represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container
+# can contain is 49.
+
 def max_area(nums):
     if len(nums) == 0:
         return 0
