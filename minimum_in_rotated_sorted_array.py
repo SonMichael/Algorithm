@@ -9,6 +9,7 @@
 # Output: 1
 # Input: [4,5,6,7,0,1,2]
 # Output: 0
+# Note: complexity time: log(n)
 
 def findMin(nums):
     if len(nums) == 0 :
