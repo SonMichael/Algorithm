@@ -10,27 +10,26 @@
 # (price = 6), profit = 6-1 = 5.
 # Not 7-1 = 6, as selling price needs to be
 # larger than buying price.
-def maxProfit(arr):
-    length = len(arr)
-    if length == 0:
+def best_buy(prices):
+    if len(prices) == 0:
         return 0
-    minPrice = arr[0]
-    maxPrice = arr[length -1]
-    maxProfit = 0
-
-    for i in range(1, length -1):
-        if arr[i] < minPrice:
-            minPrice = arr[i]
-        if arr[i] > maxPrice:
-            maxPrice = arr[i]
-        maxProfitTemp = maxPrice - minPrice
-        if maxProfitTemp > maxProfit:
-            maxProfit = maxProfitTemp
-    return maxProfit
+    min_p = prices[0]
+    n = len(prices)
+    max_p = prices[n -1]
+    profit = max_p - min_p
+    l = 1
+    r = n - 2
+    while l < r:
+        price = max_p - min_p
+        profit = max(profit, price)
 
 
+        min_p = min(prices[l], min_p)
+        max_p = max(max_p, prices[r])
 
-    
+        l += 1
+        r -= 1
+    return profit
 
-arr = [7,1,5,3,6,4]
-print(maxProfit(arr))
+prices = [7,1,5,3,6,4]
+print(best_buy(prices))
