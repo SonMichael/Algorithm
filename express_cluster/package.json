@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start_cluster": "nodemon cluster.js",
+    "start-c": "nodemon cluster.js",
     "start": "nodemon cluster_none.js"
   },
   "dependencies": {
