@@ -1,20 +1,30 @@
 import Queue from "bull";
 import process from 'process'
+import EventEmitter from "events";
+const eventEmitter = new EventEmitter();
+
 const queue = new Queue('my-first-queue');
 
 const main = () => {
 
   const users = [
-    { name: "name1", age: 31 },
-    { name: "name2", age: 25 },
-    { name: "name3", age: 19 },
-    { name: "name4", age: 17 },
-    { name: "name5", age: 32 },
+    {id:  1,  name: "name1", age: 31 },
+    { id: 2, name: "name2", age: 25 },
+    { id: 3, name: "name3", age: 19 },
+    { id: 4, name: "name4", age: 17 },
+    { id: 5, name: "name5", age: 32 },
   ];
   
   
   const controller = async () => {
-    const promises = users.map((user) => queue.add(user));
+    const promises = users.map((user) => {
+      const taskId = `${user.id}_${user.name}`
+      user.task_id = taskId
+      queue.add(user)
+      eventEmitter.once(taskId, msg => {
+        console.log(taskId);
+      });
+    });
   
     await Promise.all(promises);
   };
@@ -34,6 +44,7 @@ const main = () => {
   
   queue.on('completed', function (job, result) {
     console.log("completed")
+    eventEmitter.emit(job.data.task_id)
     // Job completed with output result!
   })
 
