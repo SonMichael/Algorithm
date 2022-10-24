@@ -29,13 +29,13 @@ def subsets(nums):
         for j in range(0 , n):
             # we only care the last bit
             # For ex:
-            # 5 = 101 => (101 >> 0 & 1) = 1
-            # 5 = 101 => (101 >> 2 & 1) = 1
+            # 4 = 0000 0100 & 14 = 0000 1110  = 0000 0100
             # Because 2 ^ n is total case and we only select with bit = 1 
             # so we only need shift n steps, we can cover all case
             # if we shift more than n we only receive with result = 0
             # if we shift less than n we can't select all cases
             if (i >> j) & 1:
+                print(i, j)
                 items.append(nums[j])
         result.append(items)
     return result
