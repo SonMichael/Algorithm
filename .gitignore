@@ -182,3 +182,6 @@ tmp/*
 .env
 .idea
 *.cer
+dockers/graylog/elasticsearch
+dockers/graylog/graylog
+dockers/graylog/mongo
