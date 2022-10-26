@@ -3,6 +3,11 @@ const prometheus = require('prom-client');
 
 const app = express()
 const port = 3000
+{/* <tên metric>{<label>=<label_value>,...} <value>
+
+ex:
+http_request_total{method="GET", path="/profile/me"} 10
+http_request_total{method="POST", path="/posts"} 11 */}
 const counter = new prometheus.Counter({
   name: 'http_request_total',
   help: 'Number of requests',

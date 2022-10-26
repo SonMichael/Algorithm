@@ -19,6 +19,13 @@ services:
     volumes:
       - $HOME/docker-volumes/air-closet-api/redis:/data
     container_name: air-closet-api-redis
+  redis1:
+    image: redis:4.0.9-alpine
+    ports:
+      - 6380:6379
+    volumes:
+      - $HOME/docker-volumes/air-closet-api/redis:/data
+    container_name: air-closet-api-redis1
   mongo:
     image: mongo:3.7.5
     ports:
