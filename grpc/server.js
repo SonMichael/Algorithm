@@ -7,7 +7,9 @@ const notes = [
 ]
 const server = new grpc.Server()
 server.addService(notesProto.NoteService.service, {
-    list: (_, callback) => {
+    list: (call, callback) => {
+        const authorization = call.metadata.get("authorization")
+        console.log("🚀 ~ file: server.js ~ line 11 ~ call", authorization, authorization[0])
         callback(null, notes)
     },
     insert: (call, callback) => {
