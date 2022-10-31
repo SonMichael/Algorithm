@@ -67,7 +67,7 @@ const main = async () => {
   queue.process('__default__', 3, actionFirstQueue);
   
   queue.on('completed', function (job, result) {
-    console.log("completed")
+    console.log(`completed: proccess_id: ${process.pid} job_id = ${job.id}`)
     eventEmitter.emit(job.data.task_id)
     // Job completed with output result!
   })

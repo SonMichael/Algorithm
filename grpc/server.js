@@ -9,6 +9,13 @@ const server = new grpc.Server()
 server.addService(notesProto.NoteService.service, {
     list: (call, callback) => {
         const authorization = call.metadata.get("authorization")
+        if (!authorization || !authorization[0]) {
+            return callback({
+                code: 400,
+                message: "Invalid Bear Token",
+                status: grpc.status.INTERNAL
+            })
+        }
         console.log("🚀 ~ file: server.js ~ line 11 ~ call", authorization, authorization[0])
         callback(null, notes)
     },

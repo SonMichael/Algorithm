@@ -7,7 +7,8 @@ var { buildSchema } = require('graphql');
 var schema = buildSchema(`
   type Query {
     author: String,
-    song:String
+    song:String,
+    errors: String
   }
 `);
 
@@ -22,6 +23,9 @@ var root = {
   song: () => {
     return 'Waiting for you!';
   },
+  errors: () => {
+    throw new Error("Could not connect to age service");
+  }
 };
 
 //Tạo server với express
