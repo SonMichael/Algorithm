@@ -186,3 +186,4 @@ dockers/graylog/elasticsearch
 dockers/graylog/graylog
 dockers/graylog/mongo
 redis_exporter/
+db/dockers/data

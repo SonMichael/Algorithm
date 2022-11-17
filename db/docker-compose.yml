@@ -5,39 +5,59 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - $HOME/docker-volumes/air-closet-api/mysql:/var/lib/mysql
-      - ./mysql:/var/local
+      - ./dockers/data/mysql-lib:/var/lib/mysql
+      - ./dockers/data/mysql:/var/local
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     command:
       mysqld --sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-    container_name: air-closet-api-mysql
+    container_name: mysql
   redis:
     image: redis:4.0.9-alpine
     ports:
       - 6379:6379
     volumes:
-      - $HOME/docker-volumes/air-closet-api/redis:/data
-    container_name: air-closet-api-redis
+      - ./dockers/data/redis:/data
+    container_name: redis
   redis1:
     image: redis:4.0.9-alpine
     ports:
       - 6380:6379
     volumes:
-      - $HOME/docker-volumes/air-closet-api/redis:/data
-    container_name: air-closet-api-redis1
-  mongo:
+      - ./dockers/data/redis1:/data
+    container_name: redis1
+  mongo1:
     image: mongo:3.7.5
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
-      - $HOME/docker-volumes/air-closet-api/mongo:/data/db
-    container_name: air-closet-api-mongo
+      - ./dockers/data/mongodb1:/data/db
+      - ./setup/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    container_name: mongo1
+    command: --replSet rs0 --bind_ip_all
+    depends_on:
+      - mongo2
+      - mongo3
+  mongo2:
+    image: mongo:3.7.5
+    ports:
+      - 27019:27017
+    volumes:
+      - ./dockers/data/mongodb2:/data/db
+    container_name: mongo2
+    command: --replSet rs0 --bind_ip_all
+  mongo3:
+    image: mongo:3.7.5
+    ports:
+      - 27020:27017
+    volumes:
+      - ./dockers/data/mongodb3:/data/db
+    container_name: mongo3
+    command: --replSet rs0 --bind_ip_all
   db:
     image: postgres:11-alpine
     volumes:
-      - ./setup:/docker-entrypoint-initdb.d/
-      - $HOME/docker-volumes/user-service/postgresql:/var/lib/postgresql/data
+      - ./dockers/data/postgresql:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     environment:
@@ -46,7 +66,4 @@ services:
       - POSTGRES_PASSWORD=postgres
       - REDIS_HOST=database-sync-redis
       - REDIS_PORT=6379
-    container_name: arthur-db
-networks:
-  default:
-    name: air-closet-api
+    container_name: postgres
