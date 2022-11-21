@@ -1,3 +1,4 @@
+// Pattern 1
 const isGiamGia = async({userId}) => {
   const record = await phieuGiamGia.findOneAndUpdate({
       userId
@@ -10,13 +11,14 @@ const isGiamGia = async({userId}) => {
       upsert: true,
   });
   if (!record) {
-      this.isGiamGia();
+      this.giamGia();
   }
 }
 
+// Pattern 2
 const isGiamGia = async({userId}) => {
   const result = await this.redis.setnx(userId, 'true');
   if (result === 1) {
-    this.isGiamGia();
+    this.giamGia();
   }
 }
