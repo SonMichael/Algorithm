@@ -1,4 +1,4 @@
-//pattern 1
+//pattern 1 (lua script)
 import Redis  from 'ioredis'
 
 const redis = new Redis()
@@ -24,4 +24,21 @@ let success = await redis.transaction(JSON.stringify({
 /*
 EVAL "return redis.call('SET', KEYS[1], ARGV[1])" 1 foo bar
 EVAL "return redis.call('GET', KEYS[1])" 1 foo
+*/
+
+
+// patter 3
+/*
+if (db.config.find({is_flash_sale: false})) {
+  // disable btn buy
+  return {is_flash_sale: false}
+}
+const val = redis.DECR(key)
+if (val < 0){
+  return {is_flash_sale: false}
+}
+if(val === 0){
+  db.config.updateOne({is_flash_sale: false}
+}
+
 */
