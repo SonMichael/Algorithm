@@ -26,6 +26,13 @@ services:
     volumes:
       - ./dockers/data/redis1:/data
     container_name: redis1
+  mongo:
+    image: mongo:3.7.5
+    ports:
+      - 27017:27017
+    volumes:
+      - ./dockers/data/mongodb:/data/db
+    container_name: mongo
   mongo1:
     image: mongo:3.7.5
     ports:
