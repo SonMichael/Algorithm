@@ -3,7 +3,6 @@
 // Stable: No
 // In-Place: Yes
 // Recursive: Yes
-// Method: Partitioning
 
 function quickSort(arr, l , r)
 {
