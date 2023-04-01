@@ -1,3 +1,9 @@
+// Time Complexity: O(nlogn)
+// Space Complexity: O(nlogn)
+// Stable: No
+// In-Place: Yes
+// Recursive: Yes
+// Method: Partitioning
 
 function quickSort(arr, l , r)
 {
