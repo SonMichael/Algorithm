@@ -2,7 +2,6 @@
 // Space Complexity: O(nlogn)
 // Stable: No
 // In-Place: Yes
-// Recursive: Yes
 
 function quickSort(arr, l , r)
 {
