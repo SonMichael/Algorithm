@@ -1,5 +1,5 @@
 
-function reOrder(arr)
+function reOrder1(arr)
 {
   const n = arr.length
   var lastIndex = n - 1
