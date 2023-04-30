@@ -10,7 +10,7 @@
 # Example 1: 
 # Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
 # Output: 3
-# Explanation: 8,10
+# Explanation: 8,10,11
 
 
 def carFleet(target, position, speed):
